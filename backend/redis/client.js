@@ -25,6 +25,13 @@ const inMemoryFallbackClient = {
 };
 
 async function initRedis() {
+  if (process.env.USE_REDIS === 'false') {
+    console.log('⚡ Redis cache is bypassed via config. Booting cleanly with high-fidelity in-memory fallback cache.');
+    isFallbackActive = true;
+    activeClient = inMemoryFallbackClient;
+    return;
+  }
+
   const redisUri = process.env.REDIS_URI || 'redis://127.0.0.1:6379';
   console.log(`📡 Attempting to connect to Redis at ${redisUri}...`);
 

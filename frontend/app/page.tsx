@@ -122,91 +122,72 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex-1 w-full min-h-screen flex flex-col font-sans">
-      {/* Dynamic Header Navbar */}
-      <header className="sticky top-0 z-50 w-full glass-panel border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center transition-all">
+    <div className="flex-1 w-full min-h-screen flex flex-col font-sans bg-[#0a0a0a]">
+      {/* Sticky Technical Top Navigation */}
+      <header className="sticky top-0 z-50 w-full bg-[#0a0a0a] border-b border-[#212327] py-4 px-6 md:px-12 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <div className="bg-gradient-to-tr from-purple-600 to-cyan-500 p-2 rounded-xl shadow-lg shadow-purple-500/20">
-            <Activity className="h-6 w-6 text-white" />
-          </div>
-          <div>
-            <h1 className="text-xl md:text-2xl font-black tracking-tight text-white flex items-center gap-1.5">
-              SYNC<span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent font-medium">UP</span>
-            </h1>
-            <p className="text-[10px] text-gray-500 uppercase tracking-widest -mt-0.5">Coaching Feed</p>
-          </div>
+          <Activity className="h-4 w-4 text-[#ff7a17]" />
+          <span className="caption-mono text-white text-sm">// SYNCUP</span>
         </div>
 
         <div className="flex items-center gap-4">
           {/* Connection Status Badge */}
-          <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-3 py-1.5 text-xs text-slate-300">
+          <div className="flex items-center gap-2 border border-[#212327] rounded-full px-3 py-1.5 text-xs text-[#7d8187] caption-mono-sm">
             {connStatus === "connected" && (
               <>
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span className="hidden sm:inline">Realtime Live</span>
+                <span className="h-1.5 w-1.5 rounded-full bg-[#ff7a17]"></span>
+                <span className="hidden sm:inline">LIVE</span>
               </>
             )}
             {connStatus === "connecting" && (
               <>
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-                </span>
-                <span className="hidden sm:inline">Connecting</span>
+                <span className="h-1.5 w-1.5 rounded-full bg-[#7c3aed] animate-pulse"></span>
+                <span className="hidden sm:inline">CONNECTING</span>
               </>
             )}
             {connStatus === "disconnected" && (
               <>
-                <span className="relative flex h-2 w-2">
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
-                </span>
-                <span className="hidden sm:inline text-rose-400">Offline</span>
+                <span className="h-1.5 w-1.5 rounded-full bg-rose-500"></span>
+                <span className="hidden sm:inline text-rose-500">OFFLINE</span>
               </>
             )}
           </div>
 
-          {/* Admin Redirect Button */}
-          <Link href="/admin" className="flex items-center gap-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs md:text-sm font-semibold py-2 px-4 rounded-xl shadow-lg shadow-indigo-500/10 hover:shadow-purple-500/25 transition-all duration-300 border border-white/10 hover:scale-[1.03] active:scale-[0.98]">
-            <Settings className="h-4 w-4" />
-            <span>Admin Console</span>
+          {/* Admin Redirect Button - Canonical Pill Outline */}
+          <Link href="/admin" className="button-md border border-white/25 hover:border-white/50 text-white py-1.5 px-4 rounded-full transition-colors">
+            Admin Console
           </Link>
         </div>
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 w-full max-w-4xl mx-auto px-4 md:px-8 py-10 flex flex-col gap-8">
+      <main className="flex-1 w-full max-w-4xl mx-auto px-4 md:px-8 py-12 md:py-16 flex flex-col gap-10">
         
-        {/* Banner Section */}
-        <section className="flex flex-col gap-2.5 text-center sm:text-left">
-          <div className="inline-flex items-center gap-1.5 bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-semibold px-3 py-1 rounded-full w-max mx-auto sm:mx-0">
-            <Sparkles className="h-3 w-3" />
-            <span>Smart Realtime Broadcasting System</span>
+        {/* Hero Band */}
+        <section className="flex flex-col gap-3">
+          <div className="caption-mono text-[#7d8187]">
+            // SMART REALTIME BROADCASTING SYSTEM
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-tight">
-            Realtime Coaching <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">Instruction Feed</span>
+          <h2 className="display-md md:display-xl text-white">
+            Realtime coaching instruction feed.
           </h2>
-          <p className="text-gray-400 text-sm md:text-base max-w-xl">
+          <p className="body-lg text-[#dadbdf] max-w-2xl">
             Receive instant, direct strategies and training adjustments from the coaching staff in realtime without refreshing.
           </p>
         </section>
 
-        {/* Caching Status Bar */}
+        {/* Cache Status Bar */}
         {!loading && !error && feeds.length > 0 && (
-          <div className="glass-panel rounded-2xl p-4 flex flex-col sm:flex-row justify-between items-center gap-3 border border-white/5">
-            <div className="flex items-center gap-2.5">
-              <span className="bg-cyan-500/15 p-1.5 rounded-lg">
-                <TrendingUp className="h-4 w-4 text-cyan-400" />
-              </span>
+          <div className="bg-[#191919] border border-[#212327] rounded-lg p-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div className="flex items-center gap-3">
+              <TrendingUp className="h-4 w-4 text-[#ff7a17] flex-shrink-0" />
               <div className="text-left">
-                <p className="text-xs font-semibold text-gray-200">Cache-Aside Caching Layer Active</p>
-                <p className="text-[10px] text-gray-400">GET queries are accelerated using an in-memory high-speed cache.</p>
+                <p className="caption-mono text-white text-xs">// CACHE-ASIDE LAYER ACTIVE</p>
+                <p className="text-[12px] text-[#7d8187] mt-0.5">GET queries are accelerated using an in-memory high-speed cache.</p>
               </div>
             </div>
-            <div className="text-xs bg-cyan-950/40 border border-cyan-800/40 text-cyan-400 px-3 py-1 rounded-full font-mono">
-              🚀 Accelerated Response
+            <div className="caption-mono-sm border border-[#212327] bg-[#1a1c20] text-white px-3 py-1 rounded-sm">
+              ACCELERATED RESPONSE
             </div>
           </div>
         )}
@@ -215,12 +196,12 @@ export default function Home() {
         {loading && (
           <section className="flex flex-col gap-4">
             {[1, 2, 3].map((idx) => (
-              <div key={idx} className="glass-panel rounded-2xl p-6 flex gap-4 animate-pulse">
-                <div className="h-10 w-10 rounded-xl bg-white/5 flex-shrink-0"></div>
-                <div className="flex-1 flex flex-col gap-2">
-                  <div className="h-4 w-1/4 bg-white/10 rounded"></div>
-                  <div className="h-3 w-full bg-white/5 rounded"></div>
-                  <div className="h-3 w-5/6 bg-white/5 rounded"></div>
+              <div key={idx} className="bg-[#191919] border border-[#212327] rounded-lg p-6 flex gap-4 animate-pulse">
+                <div className="h-10 w-10 rounded-full bg-[#1a1c20] border border-[#212327] flex-shrink-0"></div>
+                <div className="flex-1 flex flex-col gap-3 mt-1">
+                  <div className="h-3 w-1/4 bg-[#1a1c20] rounded-sm"></div>
+                  <div className="h-3 w-full bg-[#1a1c20] rounded-sm"></div>
+                  <div className="h-3 w-5/6 bg-[#1a1c20] rounded-sm"></div>
                 </div>
               </div>
             ))}
@@ -229,17 +210,15 @@ export default function Home() {
 
         {/* Error Boundary Banner */}
         {error && (
-          <section className="glass-panel border-rose-500/20 bg-rose-950/15 rounded-2xl p-8 flex flex-col items-center justify-center text-center gap-4">
-            <div className="bg-rose-500/15 p-3 rounded-full">
-              <AlertTriangle className="h-8 w-8 text-rose-400" />
-            </div>
+          <section className="bg-[#191919] border border-rose-950 rounded-lg p-8 flex flex-col items-center justify-center text-center gap-4">
+            <AlertTriangle className="h-8 w-8 text-rose-500" />
             <div className="flex flex-col gap-1 max-w-md">
-              <h3 className="text-lg font-bold text-white">Connection Issues Detected</h3>
-              <p className="text-sm text-gray-400">{error}</p>
+              <h3 className="caption-mono text-white text-sm">// CONNECTION ISSUES DETECTED</h3>
+              <p className="text-sm text-[#7d8187]">{error}</p>
             </div>
             <button 
               onClick={fetchFeeds} 
-              className="flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white font-medium text-xs py-2.5 px-5 rounded-xl border border-white/10 transition-all active:scale-[0.98]"
+              className="button-md border border-white/25 hover:border-white/50 text-white py-1.5 px-4 rounded-full transition-colors flex items-center gap-2"
             >
               <RotateCw className="h-3.5 w-3.5" />
               <span>Try Connecting Again</span>
@@ -251,43 +230,38 @@ export default function Home() {
         {!loading && !error && (
           <section className="flex flex-col gap-4">
             {feeds.length === 0 ? (
-              <div className="glass-panel rounded-2xl py-16 px-6 flex flex-col items-center justify-center text-center gap-4 border border-dashed border-white/10 bg-transparent">
-                <div className="bg-white/5 p-4 rounded-full">
-                  <Inbox className="h-10 w-10 text-gray-500" />
-                </div>
+              <div className="bg-[#191919] border border-dashed border-[#212327] rounded-lg py-16 px-6 flex flex-col items-center justify-center text-center gap-4">
+                <Inbox className="h-8 w-8 text-[#7d8187]" />
                 <div className="flex flex-col gap-1 max-w-sm">
-                  <h3 className="text-base font-semibold text-white">Feed is Empty</h3>
-                  <p className="text-xs text-gray-500">There are currently no coaching broadcasts. Access the Admin Console to post your first coach instruction!</p>
+                  <h3 className="caption-mono text-white text-sm">// FEED IS EMPTY</h3>
+                  <p className="text-xs text-[#7d8187]">There are currently no coaching broadcasts. Access the Admin Console to post your first coach instruction!</p>
                 </div>
-                <Link href="/admin" className="text-xs text-purple-400 hover:text-purple-300 font-semibold underline underline-offset-4">
-                  Go Broadcast An Update &rarr;
+                <Link href="/admin" className="button-md border border-white/25 hover:border-white/50 text-white py-1.5 px-4 rounded-full transition-colors">
+                  Go Broadcast An Update
                 </Link>
               </div>
             ) : (
               feeds.map((feed) => (
                 <article 
                   key={feed._id} 
-                  className="glass-panel rounded-2xl p-5 md:p-6 flex gap-4 md:gap-5 border border-white/5 hover:translate-y-[-2px] transition-all duration-300 relative overflow-hidden group animate-slide-down"
+                  className="bg-[#191919] border border-[#212327] rounded-lg p-5 md:p-6 flex gap-4 md:gap-5 transition-colors duration-200 animate-xai-fade relative overflow-hidden group"
                 >
-                  {/* Glowing neon side line on hover */}
-                  <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-purple-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                  <div className="h-10 md:h-12 w-10 md:w-12 rounded-xl bg-purple-500/10 border border-purple-500/15 flex-shrink-0 flex items-center justify-center text-purple-400 shadow-inner group-hover:scale-105 transition-transform duration-300">
-                    <Megaphone className="h-5 w-5" />
+                  <div className="h-10 md:h-12 w-10 md:w-12 rounded-full bg-[#1a1c20] border border-[#212327] flex-shrink-0 flex items-center justify-center text-[#ff7a17]">
+                    <Megaphone className="h-4 w-4" />
                   </div>
 
                   <div className="flex-1 flex flex-col gap-2.5">
                     {/* Header */}
                     <div className="flex justify-between items-center gap-2">
-                      <span className="text-xs font-semibold uppercase tracking-wider text-purple-400">Head Coach Broadcast</span>
-                      <div className="flex items-center gap-1 text-[10px] text-gray-500">
+                      <span className="caption-mono-sm text-[#ff7a17]">// HEAD COACH BROADCAST</span>
+                      <div className="flex items-center gap-1 caption-mono-sm text-[#7d8187] text-[11px]">
                         <Clock className="h-3 w-3" />
                         <span>{formatRelativeTime(feed.createdAt)}</span>
                       </div>
                     </div>
 
                     {/* Message Body */}
-                    <p className="text-sm md:text-base text-gray-200 leading-relaxed font-medium">
+                    <p className="body-md text-white leading-relaxed">
                       {feed.message}
                     </p>
                   </div>
@@ -299,9 +273,9 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-auto w-full py-6 border-t border-white/5 flex items-center justify-center">
-        <p className="text-[10px] text-gray-600 uppercase tracking-widest">
-          SYNCUP REALTIME FEED ENGINE © 2026
+      <footer className="mt-auto w-full py-8 border-t border-[#212327] flex items-center justify-center bg-[#0a0a0a]">
+        <p className="caption-mono-sm text-[#7d8187] text-[10px]">
+          // SYNCUP REALTIME FEED ENGINE © 2026
         </p>
       </footer>
     </div>
